@@ -7,7 +7,7 @@ import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import BooksList from './components/BooksList/BooksList';
-
+import BookDetails from './components/BookDetails/BookDetails';
 import { UserContext } from './contexts/UserContext';
 
 import * as bookService from './services/bookService';
@@ -21,11 +21,15 @@ const App = () => {
 
   useEffect(() => {
     const fetchAllBooks = async () => {
-      const booksData = await bookService.index();
-    
-      // console log to verify
-      console.log('booksData:', booksData);
+      try {
+        const booksData = await bookService.index();
+        console.log("booksData:", booksData); 
+        setBooks(Array.isArray(booksData.books) ? booksData.books : []);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
     };
+  
     if (user) fetchAllBooks();
   }, [user]);
 
@@ -36,7 +40,8 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            <Route path='/books' element={<BooksList />} />
+            <Route path='/books' element={<BooksList books={books || []} />} />
+            <Route path='/books/:bookId' element={<BookDetails />} />
           </>
         ) : (
           <>
