@@ -5,7 +5,7 @@ const BookList = (props) => {
   return (
     <main>
     {props.books.map((book) => (
-       <Link key={book.id || book._id} to={`/books`}>
+       <Link key={book.id} to={`/books/${book.id}`}>
         <article>
           <header>
             <h2>{book.title}</h2>

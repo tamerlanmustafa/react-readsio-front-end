@@ -40,8 +40,26 @@ const create = async (bookData) => {
 }
   
 
+const createReview = async (bookId, reviewData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${bookId}/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(reviewData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+
 export { 
   index,
   show,
   create,
+  createReview,
 };

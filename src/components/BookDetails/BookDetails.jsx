@@ -1,6 +1,8 @@
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import * as bookService from '../../services/bookService';
+import ReviewForm from '../ReviewForm/ReviewForm';
+
 
 const BookDetails = () => {
     const [book, setBook] = useState(null);
@@ -11,7 +13,6 @@ const BookDetails = () => {
             try {
                 const bookData = await bookService.show(bookId);
                 setBook(bookData.book);
-                console.log(bookData.book);
             } catch (error) {
                 console.error('Error fetching book:', error);
             }
@@ -19,7 +20,11 @@ const BookDetails = () => {
         fetchBook();
     }, [bookId]);
     
-
+    const handleAddReview = async (reviewFormData) => {
+        const newReview = await bookService.createReview(bookId, reviewFormData);
+        console.log(newReview);
+        setBook({ ...book, reviews: [newReview.review, ...book.reviews] });
+    };
 
     if (!book) return <p>Loading book...</p>;
 
@@ -37,9 +42,12 @@ const BookDetails = () => {
       </section>
            <section>
                <h2>Reviews</h2>
+               <ReviewForm handleAddReview={handleAddReview} />
+               
                {!book.reviews.length && <p>There are no reviews</p>}
-                {book.reviews.map((review) => (
-                     <article key={review.review_id}>
+               {book.reviews.map((review) => (
+                     <article key={review.review_id || review.id
+                     }>
                           <header>
                             <h3>Rating : {review.rating}</h3>
                             <p>{`${review.reviewer_username} posted on
