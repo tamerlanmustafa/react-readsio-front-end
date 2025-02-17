@@ -2,11 +2,10 @@ import { Link } from 'react-router';
 
 const BookList = (props) => {
   if (!props.books) return <p>Loading books...</p>;
-
   return (
     <main>
     {props.books.map((book) => (
-      <Link key={book.id} to={`/books/${book.id}`}>
+       <Link key={book.id || book._id} to={`/books`}>
         <article>
           <header>
             <h2>{book.title}</h2>

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route,  useNavigate } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import BooksList from './components/BooksList/BooksList';
 import BookDetails from './components/BookDetails/BookDetails';
 import { UserContext } from './contexts/UserContext';
+import BookForm from './components/BookForm/BookForm';
 
 import * as bookService from './services/bookService';
 
@@ -16,15 +17,25 @@ import * as bookService from './services/bookService';
 
 
 const App = () => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const { user } = useContext(UserContext);
+
+  const handleAddBook = async (bookData) => {
+    const newBook = await bookService.create(bookData);
+    if (newBook && newBook.book) {
+      setBooks([newBook.book, ...books]); 
+      navigate('/books');
+    }
+    
+  }
+
 
   useEffect(() => {
     const fetchAllBooks = async () => {
       try {
         const booksData = await bookService.index();
-        console.log("booksData:", booksData); 
-        setBooks(Array.isArray(booksData.books) ? booksData.books : []);
+        setBooks(booksData.books || []); 
       } catch (error) {
         console.error('Error fetching books:', error);
       }
@@ -42,6 +53,7 @@ const App = () => {
           <>
             <Route path='/books' element={<BooksList books={books || []} />} />
             <Route path='/books/:bookId' element={<BookDetails />} />
+            <Route path='/books/new' element={<BookForm handleAddBook={handleAddBook } />} />
           </>
         ) : (
           <>

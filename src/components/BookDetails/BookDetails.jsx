@@ -5,21 +5,19 @@ import * as bookService from '../../services/bookService';
 const BookDetails = () => {
     const [book, setBook] = useState(null);
     const { bookId } = useParams();
-    console.log("bookId:", bookId);
 
     useEffect(() => {
         const fetchBook = async () => {
             try {
                 const bookData = await bookService.show(bookId);
-                console.log("bookData:", bookData);
-                setBook(bookData);
+                setBook(bookData.book);
+                console.log(bookData.book);
             } catch (error) {
                 console.error('Error fetching book:', error);
             }
         };
         fetchBook();
     }, [bookId]);
-    console.log('book stata:', book);
     
 
 
@@ -37,8 +35,19 @@ const BookDetails = () => {
         </header>
         <p>{book.description}</p>
       </section>
-      <section>
-        <h2>Comments</h2>
+           <section>
+               <h2>Reviews</h2>
+               {!book.reviews.length && <p>There are no reviews</p>}
+                {book.reviews.map((review) => (
+                     <article key={review.review_id}>
+                          <header>
+                            <h3>Rating : {review.rating}</h3>
+                            <p>{`${review.reviewer_username} posted on
+                ${new Date(review.review_created_at).toLocaleDateString()}` }</p>
+                          </header>
+                          <p>{review.review_text}</p>
+                     </article>
+                ))}
       </section>
     </main>
   );

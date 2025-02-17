@@ -4,7 +4,8 @@ const index = async () => {
       const res = await fetch(BASE_URL, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
-      return res.json();
+      const data = await res.json();
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -22,8 +23,25 @@ const show = async (bookId) => {
     }
 }
   
+const create = async (bookData) => { 
+    try {
+      const res = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(bookData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
+  
 
 export { 
   index,
-  show
+  show,
+  create,
 };
