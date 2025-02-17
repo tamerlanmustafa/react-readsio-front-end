@@ -56,10 +56,24 @@ const createReview = async (bookId, reviewData) => {
     }
 }
 
+const deleteBook = async (bookId) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${bookId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+
 
 export { 
   index,
   show,
   create,
   createReview,
+  deleteBook
 };

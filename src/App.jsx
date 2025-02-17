@@ -30,6 +30,12 @@ const App = () => {
     
   }
 
+  const handleDeleteBook = async (bookId) => {
+    const deletedBook = await bookService.deleteBook(bookId);
+    setBooks(books.filter((book) => book.id !== deletedBook.id));
+    navigate('/books');
+  }
+
 
   useEffect(() => {
     const fetchAllBooks = async () => {
@@ -52,8 +58,10 @@ const App = () => {
         {user ? (
           <>
             <Route path='/books' element={<BooksList books={books || []} />} />
-            <Route path='/books/:bookId' element={<BookDetails />} />
             <Route path='/books/new' element={<BookForm handleAddBook={handleAddBook } />} />
+            <Route path='/books/:bookId' element={<BookDetails handleDeleteBook={handleDeleteBook } />} />
+            <Route path='/books/:bookId/edit' element={<BookForm />}
+            />
           </>
         ) : (
           <>

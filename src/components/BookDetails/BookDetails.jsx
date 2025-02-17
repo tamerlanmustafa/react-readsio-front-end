@@ -1,12 +1,14 @@
-import { useParams } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router';
+import { useState, useEffect, useContext } from 'react';
 import * as bookService from '../../services/bookService';
 import ReviewForm from '../ReviewForm/ReviewForm';
+import { UserContext } from '../../contexts/UserContext';
 
 
-const BookDetails = () => {
-    const [book, setBook] = useState(null);
-    const { bookId } = useParams();
+const BookDetails = (props) => {
+  const [book, setBook] = useState(null);
+  const { bookId } = useParams();
+  const { user } = useContext(UserContext);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -26,8 +28,7 @@ const BookDetails = () => {
         setBook({ ...book, reviews: [newReview.review, ...book.reviews] });
     };
 
-    if (!book) return <p>Loading book...</p>;
-
+    if (!book) return <p> Loading book... </p>;
    return (
     <main>
       <section>
@@ -51,9 +52,19 @@ const BookDetails = () => {
                           <header>
                             <h3>Rating : {review.rating}</h3>
                             <p>{`${review.reviewer_username} posted on
-                ${new Date(review.review_created_at).toLocaleDateString()}` }</p>
+                            ${new Date(review.review_created_at).toLocaleDateString()}`}</p>
+                            <p>{review.review_text}</p>
+                            {book.book_added_by_id === user.id && (
+                              <>
+                                <Link to={`/books/${bookId}/edit`}>Edit</Link>
+                                <button onClick={()=> props.handleDeleteBook(bookId)}>
+                                  Delete
+                                </button>                           
+                              </>
+                                      
+                            )}
+                              
                           </header>
-                          <p>{review.review_text}</p>
                      </article>
                 ))}
       </section>
