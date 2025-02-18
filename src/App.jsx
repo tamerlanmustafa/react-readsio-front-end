@@ -11,6 +11,8 @@ import BookDetails from './components/BookDetails/BookDetails';
 import { UserContext } from './contexts/UserContext';
 import BookForm from './components/BookForm/BookForm';
 
+import ReviewForm from './components/ReviewForm/ReviewForm';
+
 import * as bookService from './services/bookService';
 
 
@@ -30,11 +32,19 @@ const App = () => {
     
   }
 
+  const handleUpdateBook = async (bookId, bookData) => {
+    const updatedBook = await bookService.update(bookId, bookData);
+    setBooks(books.map((book) => (book.id === updatedBook.book.id ? updatedBook.book : book)));
+    navigate(`/books/${updatedBook.book.id}`);
+  }
+
   const handleDeleteBook = async (bookId) => {
     const deletedBook = await bookService.deleteBook(bookId);
     setBooks(books.filter((book) => book.id !== deletedBook.id));
     navigate('/books');
   }
+
+
 
 
   useEffect(() => {
@@ -60,7 +70,8 @@ const App = () => {
             <Route path='/books' element={<BooksList books={books || []} />} />
             <Route path='/books/new' element={<BookForm handleAddBook={handleAddBook } />} />
             <Route path='/books/:bookId' element={<BookDetails handleDeleteBook={handleDeleteBook } />} />
-            <Route path='/books/:bookId/edit' element={<BookForm />}
+            <Route path='/books/:bookId/edit' element={<BookForm handleUpdateBook = {handleUpdateBook} />} />
+            <Route path='/books/:bookId/reviews/:reviewId/edit' element={<ReviewForm  handleAddBook={handleAddBook} />}
             />
           </>
         ) : (

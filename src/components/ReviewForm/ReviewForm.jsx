@@ -1,13 +1,18 @@
-import { useState } from "react"
-import { useParams } from 'react-router';
-
+import { useState, useEffect } from "react"
+import { useParams, useNavigate } from 'react-router';
 
 
 const ReviewForm = (props) => {
     const [formData, setFormData] = useState({
         review_text: '',
         rating: '',
-     })
+    })
+    
+    const { bookId, reviewId } = useParams();
+    const navigate = useNavigate();
+
+
+
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }

@@ -68,6 +68,50 @@ const deleteBook = async (bookId) => {
     }
 }
 
+const update = async (bookId, bookData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${bookId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(bookData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+
+const updateReview = async (bookId, reviewId, reviewData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${bookId}/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(reviewData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+const deleteReview = async (bookId, reviewId) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${bookId}/reviews/${reviewId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+}
 
 
 export { 
@@ -75,5 +119,8 @@ export {
   show,
   create,
   createReview,
-  deleteBook
+  deleteBook,
+  update,
+  updateReview,
+  deleteReview
 };

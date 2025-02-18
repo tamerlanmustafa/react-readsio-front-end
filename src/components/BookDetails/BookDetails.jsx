@@ -22,12 +22,22 @@ const BookDetails = (props) => {
         fetchBook();
     }, [bookId]);
     
-    const handleAddReview = async (reviewFormData) => {
-        const newReview = await bookService.createReview(bookId, reviewFormData);
-        console.log(newReview);
-        setBook({ ...book, reviews: [newReview.review, ...book.reviews] });
-    };
+  const handleAddReview = async (reviewFormData) => {
+      const newReview = await bookService.createReview(bookId, reviewFormData);
+      console.log(newReview);
+      setBook({ ...book, reviews: [newReview.review, ...book.reviews] });
+  };
 
+  const handleUpdateReview = (reviewId) => async (reviewFormData) => {
+    const updatedReview = await bookService.updateReview(bookId, reviewId, reviewFormData);
+    setBook({ ...book, reviews: book.reviews.map((review) => (review.id === updatedReview.review.id ? updatedReview.review : review)) });
+  };
+  
+  const handleDeleteReview= async (reviewId) => {
+    const deletedReview = await bookService.deleteReview(bookId, reviewId);
+    setBook({ ...book, reviews: book.reviews.filter((review) => review.id !== deletedReview.id) });
+  };
+  
     if (!book) return <p> Loading book... </p>;
    return (
     <main>
@@ -53,7 +63,13 @@ const BookDetails = (props) => {
                             <h3>Rating : {review.rating}</h3>
                             <p>{`${review.reviewer_username} posted on
                             ${new Date(review.review_created_at).toLocaleDateString()}`}</p>
-                            <p>{review.review_text}</p>
+                     <p>{review.review_text}</p>
+
+                     {/* <Link to={`/books/${bookId}/reviews/${review.id || review.review_id}/edit`} onClick={() => handleUpdateReview(review.review_id || review.id)}>Update comment</Link> */}
+                     <Link onClick={() =>handleDeleteReview(review.review_id || review.id)}>Delete comment</Link>
+                     
+
+
                             {book.book_added_by_id === user.id && (
                               <>
                                 <Link to={`/books/${bookId}/edit`}>Edit</Link>

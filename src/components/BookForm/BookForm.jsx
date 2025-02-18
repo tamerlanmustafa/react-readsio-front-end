@@ -1,5 +1,8 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+
+
 
 const BookForm = (props) => {
     const [formData, setFormData] = useState({
@@ -11,17 +14,32 @@ const BookForm = (props) => {
         genre: "",
     });
 
+    const { bookId } = useParams();
+
+    useEffect(() => {   
+        const fetchBook = async () => {
+            const bookData = await props.getBook(props.bookId);
+            setFormData(bookData);
+        };
+        if (props.bookId) fetchBook();
+    }, [props.bookId]);
+
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        props.handleAddBook(formData);
+        if (bookId) {
+            await props.handleUpdateBook(bookId, formData);
+        } else {
+            await props.handleAddBook(formData);
+        }
     }
 
     return (
         <form onSubmit={handleSubmit}>
+             <h1>{bookId ? 'Edit book' : 'New book'}</h1>
             <label htmlFor="title">Title</label>
             <input            
                 required
