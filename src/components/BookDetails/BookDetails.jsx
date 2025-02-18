@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import * as bookService from '../../services/bookService';
 import ReviewForm from '../ReviewForm/ReviewForm';
 import { UserContext } from '../../contexts/UserContext';
-
+import './BookDetails.css';
 
 const BookDetails = (props) => {
   const [book, setBook] = useState(null);
@@ -40,9 +40,9 @@ const BookDetails = (props) => {
   
     if (!book) return <p> Loading book... </p>;
    return (
-    <main>
-      <section>
-        <header>
+    <main className='book-details'>
+      <section className='book-info'>
+        <header className='book-header'>
           <p>{book.genre}</p>
           <h1>{book.title}</h1>
           <p>
@@ -51,7 +51,7 @@ const BookDetails = (props) => {
         </header>
         <p>{book.description}</p>
       </section>
-           <section>
+           <section className='reviews'>
                <h2>Reviews</h2>
                <ReviewForm handleAddReview={handleAddReview} />
                
