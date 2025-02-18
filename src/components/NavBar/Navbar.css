@@ -1,3 +1,13 @@
 nav {
-    background-color: red;
-}       
+    background-color: var(--primary-light-color);
+    width: 100%;
+}         
+
+
+nav > ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    
+}
