@@ -1,0 +1,82 @@
+/* Main Dashboard */
+.dashboard {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styling */
+  .dashboard h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .dashboard h1 span {
+    text-transform: capitalize;
+  }
+  
+  /* Welcome Section (Container) */
+  .container {
+    margin-top: 30px;
+  }
+  
+  .container h1 {
+    font-size: 2rem;
+    color: #e74c3c;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .container p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-align: justify;
+  }
+  
+  /* Features List */
+  .container h2 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+    color: #34495e;
+    margin-bottom: 15px;
+  }
+  
+  .container ul {
+    padding-left: 20px;
+    list-style: none;
+  }
+  
+  .container ul li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .container ul li strong {
+    color: #e74c3c;
+  }
+  
+  /* Link Button */
+  .dashboard a {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard a:hover {
+    background-color: #2980b9;
+  }
+  
