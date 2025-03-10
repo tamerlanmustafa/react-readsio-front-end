@@ -64,10 +64,9 @@ const App = () => {
     <>
       <NavBar/>
       <Routes>
-        <Route path='/' element={user ? <Dashboard /> : <Landing />} />
+        <Route path='/' element={user ? <BooksList books={books || []}/> : <Landing />} />
         {user ? (
           <>
-            <Route path='/books' element={<BooksList books={books || []} />} />
             <Route path='/books/new' element={<BookForm handleAddBook={handleAddBook } />} />
             <Route path='/books/:bookId' element={<BookDetails handleDeleteBook={handleDeleteBook } />} />
             <Route path='/books/:bookId/edit' element={<BookForm handleUpdateBook = {handleUpdateBook} />} />

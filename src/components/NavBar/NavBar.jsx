@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router';
 import './Navbar.css';
 import { UserContext } from '../../contexts/UserContext';
-
+import logo from '../../assets/logo.png';
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
 
@@ -11,18 +11,17 @@ const NavBar = () => {
     setUser(null);
   };
 
-  return (
+  return ( 
     <nav>
       {user ? (
         <ul>
-          <li><Link to='/'>HOME</Link></li>
-          <li><Link to='/books'>BOOKS</Link></li>
+          <li><Link to='/'><img src={logo} alt="logo" width="50px" /></Link></li>
           <li><Link to='/books/new'>New book</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
         <ul>
-            <li><Link to='/'>HOME</Link></li>
+          <li><Link to='/'><img src={logo} alt="logo" width="50px" /></Link></li>
             <div className="signing">
               <li><Link to='/sign-in'>SIGN IN</Link></li>
               

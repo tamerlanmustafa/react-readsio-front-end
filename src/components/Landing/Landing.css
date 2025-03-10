@@ -1,5 +1,5 @@
 .landing {
-
+    margin-top: 10rem;
     padding: 1rem 0.5rem;
     background-color: var(--bg-color);
 }
@@ -26,6 +26,12 @@
     border: 1px solid var(--primary-dark-color);
     border-radius: 5px;
     padding: 0 1rem;
+    transition: 200ms all ease-in-out;
+}
+
+.signing-on-landing > a:hover {
+    background-color: var(--primary-dark-color);
+    color: var(--primary-light-color);
 }
 
 .intro-to-readsio {
@@ -36,6 +42,11 @@
     gap: 1rem;
 }
 
+.intro-to-readsio p{
+    padding: 1rem;
+    text-align:justify;
+
+}
 .sign-up {
     background-color: var(--blue-color);
     color: var(--primary-light-color);
@@ -43,8 +54,8 @@
 
 }
 
-.intro-to-readsio p{
-    padding: 1rem;
-    text-align:justify;
-
+.sign-up:hover {
+    background-color: var(--bg-color) !important;
+    color: var(--blue-color) !important;
+    border: 1px solid var(--blue-color) !important;
 }

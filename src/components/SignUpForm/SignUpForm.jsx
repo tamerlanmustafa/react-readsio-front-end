@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import logo from '../../assets/logo.png';
 
 import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
-
+import "../SignInForm/Signing.css"
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -39,10 +40,10 @@ const SignUpForm = () => {
 
   return (
     <main>
-      <h1>Sign Up</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
-        <div>
+        <h1>Sign Up</h1>
+        <div className='form-field'>
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
@@ -53,7 +54,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -64,7 +65,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='confirm'>Confirm Password:</label>
           <input
             type='password'
@@ -75,10 +76,12 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='signing-buttons'>
           <button disabled={isFormInvalid()}>Sign Up</button>
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
+        <img className='logo-on-signing' src={logo} alt=""  />
+        
       </form>
     </main>
   );
