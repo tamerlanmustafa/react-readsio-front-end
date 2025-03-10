@@ -26,7 +26,7 @@ const Dashboard = () => {
     <main className='dashboard'>
       <h1>Hey, {user.username[0].toUpperCase() + user.username.slice(1).toLowerCase()}</h1>
       <div class="container">
-        <h1>Welcome to Readsio</h1>
+        <h1>Readsio</h1>
         <p>Readsio is a dynamic and user-friendly app designed for avid readers who want to explore, review, and manage books effortlessly. It provides a seamless way for users to browse an extensive collection of books across various genres, view detailed information about each title, and contribute personal reviews to help fellow readers make informed decisions.</p>
 
         <p>The app allows users to register, log in, and create personalized profiles, making it easy to track their reading habits and interactions. Whether you're looking to add a new book to your virtual shelf or share your thoughts on a recently read novel, Readsio provides the tools to enhance your reading experience.</p>

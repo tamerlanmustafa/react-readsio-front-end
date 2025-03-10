@@ -1,4 +1,3 @@
-/* Main Dashboard */
 .dashboard {
     max-width: 1200px;
     margin: 40px auto;
@@ -8,7 +7,6 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
   
-  /* Header Styling */
   .dashboard h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
@@ -39,7 +37,6 @@
     text-align: justify;
   }
   
-  /* Features List */
   .container h2 {
     font-size: 1.8rem;
     margin-top: 40px;
@@ -61,7 +58,6 @@
     color: #e74c3c;
   }
   
-  /* Link Button */
   .dashboard a {
     display: inline-block;
     margin-top: 30px;
