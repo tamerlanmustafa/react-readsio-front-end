@@ -17,7 +17,7 @@ const Dashboard = () => {
       } catch (err) {
         console.log(err)
       } 
-    } 
+    }   
     if (user) fetchUsers();
   }, [user]);
   
@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <main className='dashboard'>
       <h1>Hey, {user.username[0].toUpperCase() + user.username.slice(1).toLowerCase()}</h1>
-      <div class="container">
+      <div className="container">
         <h1>Readsio</h1>
         <p>Readsio is a dynamic and user-friendly app designed for avid readers who want to explore, review, and manage books effortlessly. It provides a seamless way for users to browse an extensive collection of books across various genres, view detailed information about each title, and contribute personal reviews to help fellow readers make informed decisions.</p>
 

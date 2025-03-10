@@ -19,6 +19,7 @@
   --secondary-color: #6C4E31;
   --text-color: #000000;
   --bg-color: #FFEAC5;
+  --blue-color: #223462;
   --font-family: 'Montserrat', sans-serif;
 
 }
@@ -31,6 +32,7 @@
 }
 
 body {
+  background-color: var(--bg-color);
   margin: 0;
   padding: 0;
   height: 100%;
@@ -38,6 +40,8 @@ body {
 
 
 }
+
+
 
 html {
   margin: 0;
@@ -53,11 +57,6 @@ html {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
-
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
 }
 a {
   font-weight: 500;
@@ -72,9 +71,4 @@ ul{
   list-style: none;
 }
 
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 

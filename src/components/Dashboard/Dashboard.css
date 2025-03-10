@@ -1,28 +1,14 @@
 .dashboard {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 30px 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-color);
   }
   
-  .dashboard h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #2c3e50;
-    text-align: center;
-  }
-  
-  .dashboard h1 span {
-    text-transform: capitalize;
-  }
-  
+
   .container {
     margin-top: 30px;
   }
+
   
-  .container h1 {
+  .container > h1 {
     font-size: 2rem;
     color: #e74c3c;
     margin-bottom: 20px;
