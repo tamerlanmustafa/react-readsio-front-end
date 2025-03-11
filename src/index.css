@@ -36,7 +36,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
   box-sizing: border-box;
 
 
@@ -48,7 +47,6 @@ html {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -62,7 +60,11 @@ html {
 }
 
 main {
-  height: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 
 }
 

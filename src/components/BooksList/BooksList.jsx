@@ -4,7 +4,7 @@ import './BooksList.css';
 
 const BookList = ({ books = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 10;
+  const booksPerPage = 9;
   
   const totalPages = Math.ceil(books.length / booksPerPage);
   
@@ -17,39 +17,39 @@ const BookList = ({ books = [] }) => {
 
   return (
     <main>
-      {selectedBooks.length > 0 ? (
-        selectedBooks.map((book) => (
-          <Link key={book.id} to={`/books/${book.id}`}>
-            <article className='each-book'>
-              <header>
-                <h2>{book.title}</h2>
-                <h3>{book.author}</h3>
-              </header>
-              <p>{book.description}</p>
-            </article>
-          </Link>
-        ))
-      ) : (
-        <p>No books available.</p>
-      )}
+      <div className="books">
+        {selectedBooks.length > 0 ? (
+          selectedBooks.map((book) => (
+            <Link className='each-book' key={book.id} to={`/books/${book.id}`}>
+                  <h3>{book.title}</h3>
+                  <h4>{book.author}</h4>
+            </Link>
+          ))
+        ) : (
+          <p>No books available.</p>
+        )}
 
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button 
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={safeCurrentPage === 1}
-          >
-            ◀ Prev
-          </button>
-          <span> Page {safeCurrentPage} of {totalPages} </span>
-          <button 
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={safeCurrentPage === totalPages}
-          >
-            Next ▶
-          </button>
-        </div>
-      )}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button 
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={safeCurrentPage === 1}
+            >
+              ◀
+            </button>
+
+            <span> {safeCurrentPage} / {totalPages} </span>
+
+            <button 
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={safeCurrentPage === totalPages}
+            >
+              ▶
+            </button>
+          </div>
+        )}
+      </div>
+
     </main>
   );
 };

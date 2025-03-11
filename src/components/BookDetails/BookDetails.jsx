@@ -42,47 +42,43 @@ const BookDetails = (props) => {
    return (
     <main className='book-details'>
       <section className='book-info'>
-        <header className='book-header'>
-          <p>{book.genre}</p>
-          <h1>{book.title}</h1>
-          <p>
-            {book.author}
-          </p>
-        </header>
-        <p>{book.description}</p>
+        <h1>{book.title}</h1>
+        <p>{book.author}</p>
+        <p>Description: {book.description}</p>
+        <p>Genre: {book.genre}</p>
       </section>
-           <section className='reviews'>
-               <h2>Reviews</h2>
-               <ReviewForm handleAddReview={handleAddReview} />
-               
-               {!book.reviews.length && <p>There are no reviews</p>}
-               {book.reviews.map((review) => (
-                     <article key={review.review_id || review.id
-                     }>
-                          <header>
-                            <h3>Rating : {review.rating}</h3>
-                            <p>{`${review.reviewer_username} posted on
-                            ${new Date(review.review_created_at).toLocaleDateString()}`}</p>
-                     <p>{review.review_text}</p>
+      <section className='reviews'>
+          <h2>Reviews</h2>
+        <ReviewForm handleAddReview={handleAddReview} />
+        
+        {!book.reviews.length && <p>There are no reviews</p>}
+        {book.reviews.map((review) => (
+              <article key={review.review_id || review.id
+              }>
+                  <header>
+                    <h3>Rating : {review.rating}</h3>
+                    <p>{`${review.reviewer_username} posted on
+                    ${new Date(review.review_created_at).toLocaleDateString()}`}</p>
+              <p>{review.review_text}</p>
 
-                     {/* <Link to={`/books/${bookId}/reviews/${review.id || review.review_id}/edit`} onClick={() => handleUpdateReview(review.review_id || review.id)}>Update comment</Link> */}
-                     <Link onClick={() =>handleDeleteReview(review.review_id || review.id)}>Delete comment</Link>
-                     
+              {/* <Link to={`/books/${bookId}/reviews/${review.id || review.review_id}/edit`} onClick={() => handleUpdateReview(review.review_id || review.id)}>Update comment</Link> */}
+              <Link onClick={() =>handleDeleteReview(review.review_id || review.id)}>Delete comment</Link>
+              
 
 
-                            {book.book_added_by_id === user.id && (
-                              <>
-                                <Link to={`/books/${bookId}/edit`}>Edit</Link>
-                                <button onClick={()=> props.handleDeleteBook(bookId)}>
-                                  Delete
-                                </button>                           
-                              </>
-                                      
-                            )}
+                    {book.book_added_by_id === user.id && (
+                      <>
+                        <Link to={`/books/${bookId}/edit`}>Edit</Link>
+                        <button onClick={()=> props.handleDeleteBook(bookId)}>
+                          Delete
+                        </button>                           
+                      </>
                               
-                          </header>
-                     </article>
-                ))}
+                    )}
+                      
+                  </header>
+              </article>
+        ))}
       </section>
     </main>
   );
