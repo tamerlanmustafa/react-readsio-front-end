@@ -1,4 +1,6 @@
 .book-details {
+  background-color: var(--primary-light-color);
+
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -7,8 +9,9 @@
 
 
 .book-info {
+  background-color: var(--bg-color);
+  min-width: 400px;
   height: 300px;
-  /* width: 50%; */
   padding: 1rem;
   display: flex;
   flex-direction: column;

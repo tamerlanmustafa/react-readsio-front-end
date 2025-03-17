@@ -9,6 +9,7 @@ const BookDetails = (props) => {
   const [book, setBook] = useState(null);
   const { bookId } = useParams();
   const { user } = useContext(UserContext);
+  console.log('book:', book);
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -71,7 +72,6 @@ const BookDetails = (props) => {
                     </p>
 
 
-              {/* <Link to={`/books/${bookId}/reviews/${review.id || review.review_id}/edit`} onClick={() => handleUpdateReview(review.review_id || review.id)}>Update comment</Link> */}
 
 
               {book.added_by_username  === user.username && (
@@ -79,15 +79,6 @@ const BookDetails = (props) => {
 
               )}
 
-                    {/* {book.book_added_by_id === user.id && (
-                      <>
-                        <Link to={`/books/${bookId}/edit`}>Edit</Link>
-                        <button onClick={()=> props.handleDeleteBook(bookId)}>
-                          Delete
-                        </button>                           
-                      </>
-                              
-                    )} */}
                   </header>
               </article>
         ))}
