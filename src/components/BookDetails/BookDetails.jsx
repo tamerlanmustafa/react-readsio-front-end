@@ -24,7 +24,6 @@ const BookDetails = (props) => {
     
   const handleAddReview = async (reviewFormData) => {
       const newReview = await bookService.createReview(bookId, reviewFormData);
-      console.log(newReview);
       setBook({ ...book, reviews: [newReview.review, ...book.reviews] });
   };
 
@@ -40,33 +39,47 @@ const BookDetails = (props) => {
   
     if (!book) return <p> Loading book... </p>;
    return (
-    <main className='book-details'>
+     <main className='book-details'>
+       
       <section className='book-info'>
-        <h1>{book.title}</h1>
-        <p>{book.author}</p>
-        <p>Description: {book.description}</p>
-        <p>Genre: {book.genre}</p>
+         <h1>{book.title}</h1>
+         <h4>{book.author}</h4>
+         <div>
+          <p><strong>Description:</strong>  {book.description}</p>
+          <p><strong>Genre:</strong> {book.genre}</p>
+         </div>
       </section>
+       
+       
       <section className='reviews'>
-          <h2>Reviews</h2>
         <ReviewForm handleAddReview={handleAddReview} />
         
         {!book.reviews.length && <p>There are no reviews</p>}
         {book.reviews.map((review) => (
-              <article key={review.review_id || review.id
-              }>
-                  <header>
-                    <h3>Rating : {review.rating}</h3>
-                    <p>{`${review.reviewer_username} posted on
-                    ${new Date(review.review_created_at).toLocaleDateString()}`}</p>
-              <p>{review.review_text}</p>
+          <article className='reviews-section' key={review.review_id || review.id
+          }>
+                <h2>Reviews</h2>
+                  <header className='review-header'>
+                  <h3 className='rating-stars'>
+                    {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}
+                  </h3>
+
+                    <h4>{review.review_text}</h4>
+                    <p>
+                      <i>{review.reviewer_username}</i> posted on{" "}
+                      {new Date(review.review_created_at).toLocaleDateString()}
+                    </p>
+
 
               {/* <Link to={`/books/${bookId}/reviews/${review.id || review.review_id}/edit`} onClick={() => handleUpdateReview(review.review_id || review.id)}>Update comment</Link> */}
-              <Link onClick={() =>handleDeleteReview(review.review_id || review.id)}>Delete comment</Link>
-              
 
 
-                    {book.book_added_by_id === user.id && (
+              {book.added_by_username  === user.username && (
+                <Link onClick={() =>handleDeleteReview(review.review_id || review.id)}>Delete comment</Link>
+
+              )}
+
+                    {/* {book.book_added_by_id === user.id && (
                       <>
                         <Link to={`/books/${bookId}/edit`}>Edit</Link>
                         <button onClick={()=> props.handleDeleteBook(bookId)}>
@@ -74,8 +87,7 @@ const BookDetails = (props) => {
                         </button>                           
                       </>
                               
-                    )}
-                      
+                    )} */}
                   </header>
               </article>
         ))}

@@ -1,0 +1,47 @@
+.review-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    
+}
+
+.review-form textarea {
+    width: 100%;
+    height: auto;
+    overflow-y: hidden;
+    resize: none;
+    padding: 0.5rem;
+
+}
+
+#rating {
+    border: 1px solid var(--secondary-color);
+    border-radius: 12px;
+    text-align: center;
+    width: 40%;
+    padding: 0 0.7rem;
+}
+
+option {
+    width: 100%;
+    padding: 1rem;
+}
+
+.submit-button {
+    padding: 0.3rem 0.9rem;
+    border: none;
+    border-radius:8px;
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+    transform: scale(1.05);
+    background-color: var(--blue-color);
+    color: var(--bg-color);
+}
